@@ -6,7 +6,7 @@ interface MailData {
     content:string;
 }
 
-const transport = nodemailer.createTransport({
+ export const transport = nodemailer.createTransport({
     service:"gmail",
     auth:{
         user:process.env.GOOGLE_APP_EMAIL,
@@ -15,17 +15,3 @@ const transport = nodemailer.createTransport({
 })
 
 
-export const sendEmail = async (mailData:MailData)=>{
-    try {
-        const info = await transport.sendMail({
-            from:mailData.from,
-            to:mailData.to,
-            subject:mailData.subject,
-            text:mailData.content
-        })
-        return info
-    } catch (error) {
-        console.log(error)
-        throw error;
-    }
-}
